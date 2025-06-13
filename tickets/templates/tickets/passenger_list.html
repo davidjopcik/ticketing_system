@@ -1,0 +1,42 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Zoznam cestujúcich{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Zoznam cestujúcich</h1>
+
+    <a href="{% url 'passenger_create' %}" class="btn btn-success mb-3">+ Pridať cestujúceho</a>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Meno</th>
+                <th>Typ cestujúceho</th>
+                <th>Typ zľavy</th>
+                <th>Zľava (%)</th>
+                <th>Dátum vytvorenia</th>
+                <th>Akcia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in passengers %}
+            <tr>
+                <td>
+                    <a href="{% url 'passenger_detail' p.id %}">
+                        {{ p.first_name }} {{ p.last_name }}
+                    </a>
+                </td>
+                <td>{{ p.passenger_type.type_name }}</td>
+                <td>{{ p.passenger_type.discount.discount_type }}</td>
+                <td>{{ p.passenger_type.discount.percentage }} %</td>
+                <td>{{ p.created_at|date:"d.m.Y H:i" }}</td>
+                <td>
+                    <a href="{% url 'passenger_detail' p.id %}" class="btn btn-sm btn-info">Detail</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

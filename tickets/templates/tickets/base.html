@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}Cestovné lístky{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navigácia -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="{% url 'home' %}">Lístkový Systém</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'search_passenger' %}">Vyhľadať cestujúceho</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Domov</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ticket_sale' %}">Predaj lístka</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'station_list' %}">Stanice</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'passenger_list' %}">Registrovaní cestujúci</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ticket_list' %}">Predané lístky</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const formTypeInput = document.getElementById('form_type_input');
+
+      document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(tab => {
+        tab.addEventListener('click', function (event) {
+          const trigger = new bootstrap.Tab(tab);
+          trigger.show();
+        });
+
+        tab.addEventListener('shown.bs.tab', function (event) {
+          if (event.target.dataset.bsTarget === '#registered') {
+            formTypeInput.value = 'registered';
+          } else {
+            formTypeInput.value = 'unregistered';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

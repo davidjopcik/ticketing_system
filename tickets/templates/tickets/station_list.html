@@ -1,0 +1,38 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Zoznam staníc{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Zoznam staníc</h2>
+    <a href="{% url 'create_station' %}" class="btn btn-success mb-3">+ Pridať stanicu</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Názov</th>
+                <th>Mesto</th>
+                <th>Adresa</th>
+                <th>Zóna</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for station in stations %}
+            <tr>
+                <td>{{ station.station_name }}</td>
+                <td>{{ station.city }}</td>
+                <td>{{ station.address }}</td>
+                <td>{{ station.zone.zone_id }}</td>
+                <td>
+                    <a href="{% url 'edit_station' station.id %}" class="btn btn-sm btn-primary">Upraviť</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Žiadne stanice neboli nájdené.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

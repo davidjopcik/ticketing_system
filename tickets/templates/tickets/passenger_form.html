@@ -1,0 +1,14 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Pridať cestujúceho{% endblock %}
+
+{% block content %}
+    <h1>Nový cestujúci</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Uložiť</button>
+        <a href="{% url 'passenger_list' %}" class="btn btn-secondary">Zrušiť</a>
+    </form>
+{% endblock %}

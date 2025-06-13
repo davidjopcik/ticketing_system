@@ -1,0 +1,37 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Detail cestujúceho{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Cestujúci: {{ passenger.first_name }} {{ passenger.last_name }}</h2>
+    <a href="{% url 'passenger_list' %}" class="btn btn-secondary my-3">← Späť na zoznam cestujúcich</a>
+    <h4 class="mt-4">Cesty (lístky):</h4>
+    {% if tickets %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Odkiaľ</th>
+                <th>Kam</th>
+                <th>Platnosť</th>
+                <th>Zóny</th>
+                <th>Cena</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.start_station.station_name }}</td>
+                <td>{{ ticket.end_station.station_name }}</td>
+                <td>{{ ticket.valid_from|date:"d.m.Y H:i" }} – {{ ticket.valid_until|date:"d.m.Y H:i" }}</td>
+                <td>{{ ticket.number_of_zones }}</td>
+                <td>{{ ticket.price }} €</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Žiadne cesty nenájdené.</p>
+    {% endif %}
+</div>
+{% endblock %}

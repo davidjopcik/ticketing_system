@@ -1,0 +1,67 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Zakúpené lístky{% endblock %}
+
+{% block content %}
+<h1>Všetky zakúpené lístky</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Cestujúci</th>
+            <th>Registrovaný</th>
+            <th>Typ cestujúceho</th>
+            <th>Typ zľavy</th>
+            <th>Zľava</th>
+            <th>Trasa</th>
+            <th>Zóny</th>
+            <th>Cena</th>
+            <th>Platnosť do</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <td>
+                {% if ticket.passenger %}
+                {{ ticket.passenger.first_name }} {{ ticket.passenger.last_name }}
+                {% else %}
+                {{ ticket.first_name }} {{ ticket.last_name }}
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.passenger %}
+                Áno
+                {% else %}
+                Nie
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.passenger.passenger_type %}
+                {{ ticket.passenger.passenger_type }}
+                {% else %}
+                --
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.discount.discount_type %}
+                {{ ticket.discount.discount_type }}
+                {% else %}
+                0 %
+                {% endif %}
+            </td>
+            <td>
+                {% if ticket.discount.percentage %}
+                {{ ticket.discount.percentage }} %
+                {% else %}
+                0 %
+                {% endif %}
+            </td>
+            <td>{{ ticket.start_station }} → {{ ticket.end_station }}</td>
+            <td>{{ ticket.number_of_zones }}</td>
+            <td>{{ ticket.price }} €</td>
+            <td>{{ ticket.valid_until }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

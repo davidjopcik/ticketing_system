@@ -1,0 +1,18 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Upraviť stanicu{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Upraviť stanicu: {{ station.station_name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Uložiť zmeny</button>
+        <button class="btn btn-primary">
+            <a class="nav-link" href="{% url 'create_zone' %}">Pridať zónu</a>
+        </button>
+        <a href="{% url 'station_list' %}" class="btn btn-secondary">Späť</a>
+    </form>
+</div>
+{% endblock %}

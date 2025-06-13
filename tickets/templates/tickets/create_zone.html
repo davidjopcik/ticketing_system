@@ -1,0 +1,15 @@
+{% extends 'tickets/base.html' %}
+
+{% block title %}Pridať novú zónu{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Pridať novú zónu</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Uložiť</button>
+        <a href="{% url 'station_list' %}" class="btn btn-secondary">Späť</a>  
+    </form>
+</div>
+{% endblock %}
