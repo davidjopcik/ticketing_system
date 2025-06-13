@@ -19,27 +19,30 @@ Ako základ som použil projekt z DS2 - predaj cestovných lístkov
 
 ## Inštalácia a Spustenie
 
-Na spustenie aplikácie postupujte podľa nasledujúcich krokov:
+1.  **Naklonovanie repozitára**:
+    ```bash
+    git clone https://github.com/davidjopcik/ticketing_system.git
+    ```
 
-1.  **Vytvorenie virtuálneho prostredia**:
+2.  **Vytvorenie virtuálneho prostredia**:
     ```bash
     python -m venv venv
     source venv/bin/activate
     ```
 
-2.  **Vytvorenie admin účtu**:
+3.  **Vytvorenie admin účtu**:
     ```bash
     python manage.py createsuperuser
     ```
 
-3.  **Spustenie servera**:
+4.  **Spustenie servera**:
     ```bash
     python manage.py runserver
     ```
     Aplikácia bude dostupná na:
     http://127.0.0.1:8000/
 
-4. **Prihlásenie sa do admin rozhrania**
+5. **Prihlásenie sa do admin rozhrania**
     ```bash
     http://127.0.0.1:8000/admin/
     ```
